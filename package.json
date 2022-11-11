@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@rivascva/react-native-code-editor": "^1.2.2",
+    "@wniemiec-component-reactnative/transparent-button": "^1.0.1",
     "react": "18.1.0",
     "react-native": "0.70.5"
   },

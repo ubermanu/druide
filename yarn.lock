@@ -1536,6 +1536,11 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
+"@wniemiec-component-reactnative/transparent-button@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@wniemiec-component-reactnative/transparent-button/-/transparent-button-1.0.1.tgz#1a0c1f9659354a18eb3d4398febd8c2a50a83f3b"
+  integrity sha512-6lgkrY1tgxKe/3caviFd5iGQgZkpq3atAerwlOucahr2bgjqSxc8pknRCmtLlUefwLP8tYaSNXVPDMx5urC48A==
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.6"
   resolved "https://registry.npmjs.org/abab/-/abab-2.0.6.tgz"
