@@ -1,7 +1,4 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
  * @format
  * @flow strict-local
  */
@@ -9,12 +6,20 @@
 import type { Node } from 'react';
 import React, { useState } from 'react';
 
-import { SafeAreaView, ScrollView, StatusBar, View, Text } from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  View,
+  Text,
+  StyleSheet,
+} from 'react-native';
 
 import CodeEditor, {
   CodeEditorSyntaxStyles,
 } from '@rivascva/react-native-code-editor';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import TransparentButton from '@wniemiec-component-reactnative/transparent-button';
 
 const App: () => Node = () => {
@@ -41,15 +46,23 @@ const App: () => Node = () => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          padding: 10,
+          padding: 15,
+          paddingBottom: 0,
+          paddingTop: 0,
           alignItems: 'center',
         }}>
         <View
           style={{
             flex: 1,
           }}>
-          <Text style={{ color: areaStyle.color }}>main.js</Text>
+          <Text style={{ color: areaStyle.color, fontSize: 18 }}>main.js</Text>
         </View>
+        <TransparentButton
+          title={<Icon name="search" size={20} color={areaStyle.color} />}
+        />
+        <TransparentButton
+          title={<Icon name="settings" size={18} color={areaStyle.color} />}
+        />
         <TransparentButton
           title={mode.toUpperCase()}
           onPress={() => setMode(mode === 'normal' ? 'insert' : 'normal')}
@@ -57,6 +70,7 @@ const App: () => Node = () => {
           fgColor={areaStyle.color}
         />
       </View>
+      <Divider />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View>
           <CodeEditor
@@ -75,6 +89,18 @@ const App: () => Node = () => {
         </View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const Divider = () => {
+  return (
+    <View
+      style={{
+        marginVertical: 8,
+        borderBottomColor: '#737373',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+      }}
+    />
   );
 };
 
