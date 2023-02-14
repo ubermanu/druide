@@ -1,9 +1,15 @@
 <script>
-  import { files, selectFile } from '$stores/editor.js'
+  import { files, selectFile, appendFile, createEmptyFile } from '$stores/editor.js'
   import Tab from '$components/Editor/Tab.svelte'
+
+  function newFile() {
+    const file = createEmptyFile()
+    appendFile(file)
+    selectFile(file)
+  }
 </script>
 
-<div class="tabs">
+<div class="tabs" on:dblclick={newFile}>
   {#each $files as file}
     <Tab {file} on:click={() => selectFile(file)}>
       {file.name}

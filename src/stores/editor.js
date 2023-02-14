@@ -15,8 +15,8 @@ export const mode = writable('view')
  * @typedef {Object} File
  * @property {string} name
  * @property {string} content
- * @property {string} path
- * @property {string} type
+ * @property {?string} path
+ * @property {string} lang
  * @property {boolean} hasUnsavedChanges
  * @property {boolean} isActive
  */
@@ -30,7 +30,7 @@ export const files = writable([
     name: 'index.html',
     content: '<h1>Hello World</h1>',
     path: '/home/user/projects/my-project/index.html',
-    type: 'html',
+    lang: 'html',
     hasUnsavedChanges: false,
     isActive: true
   },
@@ -38,7 +38,7 @@ export const files = writable([
     name: 'index.js',
     content: 'console.log("Hello World")',
     path: '/home/user/projects/my-project/index.js',
-    type: 'js',
+    lang: 'js',
     hasUnsavedChanges: true,
     isActive: false
   }
@@ -94,4 +94,31 @@ export const closeFile = (file) => {
     }
     return $files.filter((f) => f !== file)
   })
+}
+
+/**
+ * Adds a file to the list of files.
+ * @param {File} file
+ */
+export const appendFile = (file) => {
+  files.update(($files) => {
+    return [...$files, file]
+  })
+}
+
+let untitledFileCounter = 0
+
+/**
+ * Creates an empty file.
+ * @returns {File}
+ */
+export const createEmptyFile = () => {
+  return {
+    name: 'Untitled ' + ++untitledFileCounter,
+    content: '',
+    path: null,
+    lang: 'js',
+    hasUnsavedChanges: false,
+    isActive: false
+  }
 }
