@@ -43,6 +43,12 @@
     overflow-x: auto;
   }
 
+  .page {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 100%;
+  }
+
   .page:not(.active) {
     display: none;
   }

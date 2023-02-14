@@ -10,6 +10,15 @@
   let view
   let container
 
+  let theme = EditorView.theme(
+    {
+      '& .cm-gutters': { background: 'transparent' },
+      '& .cm-activeLine': { background: 'rgba(255, 255, 255, 0.1)' },
+      '& .cm-cursor': { borderLeft: '1px solid white' }
+    },
+    { dark: true }
+  )
+
   let editable = new Compartment()
 
   onMount(() => {
@@ -19,6 +28,7 @@
         doc: doc,
         extensions: [
           basicSetup,
+          theme,
           javascript(),
           editable.of([
             // prettier-ignore
