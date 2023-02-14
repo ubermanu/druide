@@ -1,18 +1,17 @@
 <script>
-import Toolbar from "$components/Toolbar.svelte";
-import EditorView from "$views/EditorView.svelte";
+  import Toolbar from '$components/Toolbar.svelte'
+  import EditorView from '$views/EditorView.svelte'
 </script>
 
 <main>
-    <Toolbar />
-    <EditorView />
+  <Toolbar />
+  <EditorView />
 </main>
 
-<aside>
-</aside>
+<aside />
 
 <style>
-    main {
-        height: 100vh;
-    }
+  main {
+    height: 100vh;
+  }
 </style>

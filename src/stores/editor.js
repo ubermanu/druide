@@ -1,15 +1,15 @@
-import {derived, writable} from 'svelte/store';
+import { derived, writable } from 'svelte/store'
 
 export const MODES = {
-    VIEW: 'view',
-    EDIT: 'edit',
+  VIEW: 'view',
+  EDIT: 'edit'
 }
 
 /**
  * Can be 'view' or 'edit'
  * @type {Writable<string>}
  */
-export const mode = writable('view');
+export const mode = writable('view')
 
 /**
  * @typedef {Object} File
@@ -26,42 +26,41 @@ export const mode = writable('view');
  * @type {import('svelte/store').Writable<File[]>}
  */
 export const files = writable([
-    {
-        name: 'index.html',
-        content: '<h1>Hello World</h1>',
-        path: '/home/user/projects/my-project/index.html',
-        type: 'html',
-        hasUnsavedChanges: false,
-        isActive: true,
-    },
-    {
-        name: 'index.js',
-        content: 'console.log("Hello World")',
-        path: '/home/user/projects/my-project/index.js',
-        type: 'js',
-        hasUnsavedChanges: true,
-        isActive: false,
-    }
-]);
+  {
+    name: 'index.html',
+    content: '<h1>Hello World</h1>',
+    path: '/home/user/projects/my-project/index.html',
+    type: 'html',
+    hasUnsavedChanges: false,
+    isActive: true
+  },
+  {
+    name: 'index.js',
+    content: 'console.log("Hello World")',
+    path: '/home/user/projects/my-project/index.js',
+    type: 'js',
+    hasUnsavedChanges: true,
+    isActive: false
+  }
+])
 
 /**
  * The currently active file.
  * @type {import('svelte/store').Readable<File>}
  */
-export const activeFile = derived(
-    [files],
-    ([$files]) => $files.find(file => file.isActive)
-);
+export const activeFile = derived([files], ([$files]) => $files.find((file) => file.isActive))
 
 /**
  * Selects a file.
  * @param {File} file
  */
 export const selectFile = (file) => {
-    files.update($files => $files.map(f => {
-        f.isActive = f === file;
-        return f;
-    }));
+  files.update(($files) =>
+    $files.map((f) => {
+      f.isActive = f === file
+      return f
+    })
+  )
 }
 
 /**
@@ -69,12 +68,14 @@ export const selectFile = (file) => {
  * @param {File} file
  */
 export const saveFile = (file) => {
-    files.update($files => $files.map(f => {
-        if (f === file) {
-            f.hasUnsavedChanges = false;
-        }
-        return f;
-    }));
+  files.update(($files) =>
+    $files.map((f) => {
+      if (f === file) {
+        f.hasUnsavedChanges = false
+      }
+      return f
+    })
+  )
 }
 
 /**
@@ -83,14 +84,14 @@ export const saveFile = (file) => {
  * @param {File} file
  */
 export const closeFile = (file) => {
-    files.update($files => {
-        const index = $files.indexOf(file);
-        if (index === -1) {
-            return $files;
-        }
-        if (file.isActive && index > 0) {
-            $files[index - 1].isActive = true;
-        }
-        return $files.filter(f => f !== file);
-    });
+  files.update(($files) => {
+    const index = $files.indexOf(file)
+    if (index === -1) {
+      return $files
+    }
+    if (file.isActive && index > 0) {
+      $files[index - 1].isActive = true
+    }
+    return $files.filter((f) => f !== file)
+  })
 }

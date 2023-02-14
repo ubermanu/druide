@@ -1,8 +1,8 @@
 <script>
-    import CodeMirror from "$components/CodeMirror.svelte";
-    import { mode } from "$stores/editor.js";
+  import CodeMirror from '$components/CodeMirror.svelte'
+  import { mode } from '$stores/editor.js'
 
-    export let file;
+  export let file
 </script>
 
-<CodeMirror doc={file.content} readOnly={$mode !== "edit"} />
+<CodeMirror doc={file.content} readOnly={$mode !== 'edit'} />
