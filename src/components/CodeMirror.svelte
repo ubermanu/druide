@@ -8,13 +8,13 @@
   export let doc = ''
 
   let view
-  let parent
+  let container
 
   let editable = new Compartment()
 
   onMount(() => {
     view = new EditorView({
-      parent: parent,
+      parent: container,
       state: EditorState.create({
         doc: doc,
         extensions: [
@@ -44,4 +44,19 @@
   }
 </script>
 
-<div bind:this={parent} />
+<div bind:this={container} class="container" class:readOnly />
+
+<style>
+  .container {
+    width: 100%;
+  }
+
+  .container.readOnly {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .container.readOnly :global(.cm-activeLine) {
+    background: transparent !important;
+  }
+</style>
