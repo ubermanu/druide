@@ -17,7 +17,15 @@
       parent: parent,
       state: EditorState.create({
         doc: doc,
-        extensions: [basicSetup, javascript(), editable.of([EditorView.editable.of(!readOnly), EditorState.readOnly.of(readOnly)])]
+        extensions: [
+          basicSetup,
+          javascript(),
+          editable.of([
+            // prettier-ignore
+            EditorView.editable.of(!readOnly),
+            EditorState.readOnly.of(readOnly)
+          ])
+        ]
       })
     })
   })
@@ -25,7 +33,13 @@
   $: if (view) {
     // Update the read-only state
     view.dispatch({
-      effects: [editable.reconfigure([EditorView.editable.of(!readOnly), EditorState.readOnly.of(readOnly)])]
+      effects: [
+        editable.reconfigure([
+          // prettier-ignore
+          EditorView.editable.of(!readOnly),
+          EditorState.readOnly.of(readOnly)
+        ])
+      ]
     })
   }
 </script>
