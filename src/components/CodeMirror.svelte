@@ -1,11 +1,14 @@
 <script>
+  import { onMount } from 'svelte'
   import { basicSetup, EditorView } from 'codemirror'
   import { Compartment, EditorState } from '@codemirror/state'
   import { javascript } from '@codemirror/lang-javascript'
-  import { onMount } from 'svelte'
 
   export let readOnly = false
   export let doc = ''
+
+  // TODO: Add a default null language
+  export let lang = javascript()
 
   let view
   let container
@@ -20,6 +23,7 @@
   )
 
   let editable = new Compartment()
+  let language = new Compartment()
 
   onMount(() => {
     view = new EditorView({
@@ -29,7 +33,7 @@
         extensions: [
           basicSetup,
           theme,
-          javascript(),
+          language.of(lang),
           editable.of([
             // prettier-ignore
             EditorView.editable.of(!readOnly),
@@ -48,7 +52,8 @@
           // prettier-ignore
           EditorView.editable.of(!readOnly),
           EditorState.readOnly.of(readOnly)
-        ])
+        ]),
+        language.reconfigure(lang)
       ]
     })
   }
